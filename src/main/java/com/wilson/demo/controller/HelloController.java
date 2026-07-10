@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @RestController
 public class HelloController {
@@ -21,7 +22,7 @@ public class HelloController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String hello(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String id) {
@@ -31,6 +32,11 @@ public class HelloController {
         
         return String.format("Hello, World! Welcome\nStudent Name: %s\nStudent ID: %s", 
                 studentName, studentId);
+    }
+
+    @GetMapping("/students")
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudents();
     }
 
     @PostMapping("/student")

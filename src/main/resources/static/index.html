@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilson's School Roster</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <h1 id="title-heading">Welcome to Wilson's School</h1>
+    </header>
+
+    <main class="center-container">
+        <div class="glass-card" id="form-container">
+            <h2 id="form-title">Register Student</h2>
+            <form id="student-form">
+                <div class="input-group">
+                    <label for="student-name">Student Name</label>
+                    <input type="text" id="student-name" placeholder="John Doe" required autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" placeholder="S12345" required autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label for="student-dob">Date of Birth</label>
+                    <input type="text" id="student-dob" placeholder="MM/DD/YY" required autocomplete="off" maxlength="10">
+                </div>
+
+                <button type="submit" class="submit-btn" id="btn-submit">Add to Roster</button>
+            </form>
+            <div id="message-area" class="message-container"></div>
+        </div>
+    </main>
+
+    <footer class="roster-badge" id="roster-badge-container">
+        <span class="badge-label">TOTAL ROSTER</span>
+        <span class="badge-count" id="roster-count">0</span>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
