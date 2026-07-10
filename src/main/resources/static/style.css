@@ -11,17 +11,17 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     overflow-x: hidden;
     position: relative;
+    padding-bottom: 5rem; /* Space for the bottom elements */
 }
 
 /* Header Styling */
 .main-header {
     width: 100%;
     text-align: center;
-    padding-top: 6vh;
-    padding-bottom: 2vh;
+    padding-top: 5vh;
+    padding-bottom: 3vh;
 }
 
 .main-header h1 {
@@ -30,54 +30,96 @@ body {
     letter-spacing: -0.05em;
     text-transform: uppercase;
     color: #ffffff;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    text-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
 }
 
-/* Center Container */
-.center-container {
+/* Main Container Layout */
+.main-container {
     flex-grow: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 2rem;
+    gap: 3rem;
+    padding: 0 2rem 3rem 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Glass Card */
+/* Glass Card Auth Box */
 .glass-card {
-    background: rgba(20, 20, 20, 0.7);
+    background: rgba(18, 18, 18, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 20px;
-    padding: 3rem 3.5rem;
+    padding: 2.5rem 3rem;
     width: 100%;
-    max-width: 540px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.05);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    max-width: 500px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
 }
 
 .glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.25);
 }
 
-.glass-card h2 {
-    font-size: 2.2rem;
+/* Tabs Header */
+.tabs-header {
+    display: flex;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #a3a3a3;
+    font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 2.5rem;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+
+.tab-btn:hover {
+    color: #ffffff;
+}
+
+.tab-btn.active {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+/* Auth Forms toggles */
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.form-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
     text-align: center;
     letter-spacing: -0.02em;
 }
 
-/* Form Styles */
+/* Form inputs */
 .input-group {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     display: flex;
     flex-direction: column;
 }
 
 .input-group label {
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     color: #a3a3a3;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -86,33 +128,33 @@ body {
 .input-group input {
     background: rgba(255, 255, 255, 0.05);
     border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 1.1rem 1.3rem;
-    font-size: 1.3rem;
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    font-size: 1.2rem;
     color: #ffffff;
     outline: none;
     transition: all 0.25s ease;
 }
 
 .input-group input:focus {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
     border-color: #ffffff;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
 }
 
 .input-group input::placeholder {
-    color: #525252;
+    color: #4a4a4a;
 }
 
-/* Submit Button */
+/* Submit button */
 .submit-btn {
     width: 100%;
     background-color: #ffffff;
     color: #000000;
     border: none;
-    border-radius: 10px;
-    padding: 1.2rem;
-    font-size: 1.25rem;
+    border-radius: 8px;
+    padding: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -121,15 +163,14 @@ body {
 
 .submit-btn:hover {
     background-color: #e5e5e5;
-    transform: scale(1.02);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+    transform: scale(1.01);
 }
 
 .submit-btn:active {
-    transform: scale(0.98);
+    transform: scale(0.99);
 }
 
-/* Messages */
+/* Notification Messages */
 .message-container {
     margin-top: 1.5rem;
     padding: 1rem;
@@ -141,17 +182,80 @@ body {
 }
 
 .message-container.success {
-    background-color: rgba(34, 197, 94, 0.15);
+    background-color: rgba(34, 197, 94, 0.1);
     border: 1px solid rgb(34, 197, 94);
     color: #4ade80;
     display: block;
 }
 
 .message-container.error {
-    background-color: rgba(239, 68, 68, 0.15);
+    background-color: rgba(239, 68, 68, 0.1);
     border: 1px solid rgb(239, 68, 68);
     color: #f87171;
     display: block;
+}
+
+/* Logins Directory Table */
+.directory-container {
+    width: 100%;
+    max-width: 900px;
+    margin-top: 1rem;
+}
+
+.directory-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.01em;
+    color: #e5e5e5;
+    text-align: center;
+}
+
+.table-wrapper {
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.roster-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+.roster-table th {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #a3a3a3;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    padding: 1.1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.roster-table td {
+    padding: 1.1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.roster-table tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.roster-table tr:last-child td {
+    border-bottom: none;
+}
+
+.empty-state {
+    text-align: center;
+    color: #525252;
+    padding: 3rem !important;
+    font-style: italic;
 }
 
 /* Roster Counter Badge in Bottom Right */
@@ -159,48 +263,37 @@ body {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    background: rgba(20, 20, 20, 0.85);
+    background: rgba(20, 20, 20, 0.9);
     border: 2px solid #ffffff;
     border-radius: 12px;
-    padding: 1rem 1.5rem;
+    padding: 0.8rem 1.3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.1);
     z-index: 100;
-    min-width: 140px;
-    animation: pulse 3s infinite ease-in-out;
+    min-width: 130px;
 }
 
 .badge-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 800;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     color: #a3a3a3;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
 }
 
 .badge-count {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 800;
     color: #ffffff;
 }
 
-@keyframes pulse {
-    0%, 100% {
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.1);
-    }
-    50% {
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
-    }
-}
-
 /* Responsive adjustments */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .main-header h1 {
         font-size: 2.2rem;
-        padding: 0 1rem;
     }
     .glass-card {
         padding: 2rem;
@@ -209,6 +302,6 @@ body {
         position: relative;
         bottom: auto;
         right: auto;
-        margin: 0 auto 2rem auto;
+        margin: 2rem auto 0 auto;
     }
 }

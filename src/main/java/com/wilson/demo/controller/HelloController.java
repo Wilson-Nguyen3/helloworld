@@ -43,7 +43,8 @@ public class HelloController {
     public String addStudent(
             @RequestParam String name,
             @RequestParam String id,
-            @RequestParam(required = false) String dob) {
+            @RequestParam(required = false) String dob,
+            @RequestParam(required = false) String password) {
         
         if (name == null || name.isEmpty() || id == null || id.isEmpty()) {
             return "Error: Student name and ID are required!";
@@ -58,11 +59,29 @@ public class HelloController {
                     return "Error: Date of birth must be in YYYY-MM-DD format!";
                 }
             }
-            Student student = studentService.createStudent(name, id, dateOfBirth);
+            // Use the student ID as the password if none is provided
+            String rawPassword = (password != null && !password.isEmpty()) ? password : id;
+            Student student = studentService.createStudent(name, id, dateOfBirth, rawPassword);
             return String.format("Student added successfully!\nName: %s\nID: %s\nDate of Birth: %s\nDatabase ID: %d", 
                     student.getStudentName(), student.getStudentId(), student.getDateOfBirth(), student.getId());
         } catch (Exception e) {
             return "Error: " + e.getMessage();
+        }
+    }
+
+    @PostMapping("/login")
+    public String login(
+            @RequestParam String id,
+            @RequestParam String password) {
+        if (id == null || id.isEmpty() || password == null || password.isEmpty()) {
+            return "Error: Student ID and password are required!";
+        }
+        boolean authenticated = studentService.authenticate(id, password);
+        if (authenticated) {
+            Student student = studentService.getStudentById(id);
+            return String.format("Login successful! Welcome back, %s.", student.getStudentName());
+        } else {
+            return "Error: Invalid Student ID or password.";
         }
     }
 

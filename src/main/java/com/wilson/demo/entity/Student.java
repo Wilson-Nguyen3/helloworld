@@ -20,6 +20,9 @@ public class Student {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth = LocalDate.of(2000, 1, 1);
 
+    @Column(name = "password_hash")
+    private String passwordHash;
+
     // Constructors
     public Student() {
     }
@@ -34,6 +37,13 @@ public class Student {
         this.studentName = studentName;
         this.studentId = studentId;
         this.dateOfBirth = dateOfBirth != null ? dateOfBirth : LocalDate.of(2000, 1, 1);
+    }
+
+    public Student(String studentName, String studentId, LocalDate dateOfBirth, String passwordHash) {
+        this.studentName = studentName;
+        this.studentId = studentId;
+        this.dateOfBirth = dateOfBirth != null ? dateOfBirth : LocalDate.of(2000, 1, 1);
+        this.passwordHash = passwordHash;
     }
 
     // Getters and Setters
@@ -67,6 +77,14 @@ public class Student {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     @Override
