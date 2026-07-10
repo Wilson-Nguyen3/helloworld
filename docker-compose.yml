@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   helloworld:
-    image: wilsonnguyen3/helloworld:latest
+    image: 172.25.65.138:5000/helloworld:latest
     container_name: spring-boot-helloworld
     ports:
       - "8080:8080"
