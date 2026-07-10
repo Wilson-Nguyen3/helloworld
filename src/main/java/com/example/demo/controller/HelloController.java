@@ -1,11 +1,13 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.entity.Student;
 
 @RestController
 public class HelloController {
@@ -59,4 +61,3 @@ public class HelloController {
                 student.getStudentName(), student.getStudentId());
     }
 }
-

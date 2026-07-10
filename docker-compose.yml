@@ -1,15 +1,41 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: helloworld-postgres
+    environment:
+      POSTGRES_DB: helloworld_db
+      POSTGRES_USER: helloworld_user
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U helloworld_user -d helloworld_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   helloworld:
     image: 172.25.65.138:5000/helloworld:latest
     container_name: spring-boot-helloworld
+    depends_on:
+      postgres:
+        condition: service_healthy
     ports:
       - "8080:8080"
     environment:
       - JAVA_OPTS=-Xmx512m -Xms256m
       - STUDENT_NAME=${STUDENT_NAME:-Wilson Nguyen}
       - STUDENT_ID=${STUDENT_ID:-S12345}
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=helloworld_db
+      - DB_USER=helloworld_user
+      - DB_PASSWORD=password123
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/"]
@@ -17,3 +43,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+
+volumes:
+  postgres_data:
+
