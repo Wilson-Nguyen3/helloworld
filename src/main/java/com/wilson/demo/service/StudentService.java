@@ -35,8 +35,12 @@ public class StudentService {
 
     public boolean authenticate(String studentId, String rawPassword) {
         Student student = getStudentById(studentId);
-        if (student == null || student.getPasswordHash() == null || rawPassword == null) {
+        if (student == null || rawPassword == null) {
             return false;
+        }
+        if (student.getPasswordHash() == null) {
+            // Fallback for legacy students created before password hashes were introduced
+            return rawPassword.equals(studentId);
         }
         return student.getPasswordHash().equals(hashPassword(rawPassword));
     }
