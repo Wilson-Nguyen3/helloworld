@@ -8,6 +8,8 @@ services:
       - "8080:8080"
     environment:
       - JAVA_OPTS=-Xmx512m -Xms256m
+      - STUDENT_NAME=${STUDENT_NAME:-Wilson Nguyen}
+      - STUDENT_ID=${STUDENT_ID:-S12345}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/"]
