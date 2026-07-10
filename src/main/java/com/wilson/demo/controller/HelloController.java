@@ -36,16 +36,25 @@ public class HelloController {
     @PostMapping("/student")
     public String addStudent(
             @RequestParam String name,
-            @RequestParam String id) {
+            @RequestParam String id,
+            @RequestParam(required = false) String dob) {
         
         if (name == null || name.isEmpty() || id == null || id.isEmpty()) {
             return "Error: Student name and ID are required!";
         }
         
         try {
-            Student student = studentService.createStudent(name, id);
-            return String.format("Student added successfully!\nName: %s\nID: %s\nDatabase ID: %d", 
-                    student.getStudentName(), student.getStudentId(), student.getId());
+            java.time.LocalDate dateOfBirth = null;
+            if (dob != null && !dob.isEmpty()) {
+                try {
+                    dateOfBirth = java.time.LocalDate.parse(dob);
+                } catch (Exception ex) {
+                    return "Error: Date of birth must be in YYYY-MM-DD format!";
+                }
+            }
+            Student student = studentService.createStudent(name, id, dateOfBirth);
+            return String.format("Student added successfully!\nName: %s\nID: %s\nDate of Birth: %s\nDatabase ID: %d", 
+                    student.getStudentName(), student.getStudentId(), student.getDateOfBirth(), student.getId());
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
@@ -57,7 +66,7 @@ public class HelloController {
         if (student == null) {
             return "Student not found with ID: " + id;
         }
-        return String.format("Found Student:\nName: %s\nID: %s", 
-                student.getStudentName(), student.getStudentId());
+        return String.format("Found Student:\nName: %s\nID: %s\nDate of Birth: %s", 
+                student.getStudentName(), student.getStudentId(), student.getDateOfBirth());
     }
 }

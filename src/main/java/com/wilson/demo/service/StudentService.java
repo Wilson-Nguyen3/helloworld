@@ -16,6 +16,11 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+    public Student createStudent(String studentName, String studentId, java.time.LocalDate dateOfBirth) {
+        Student student = new Student(studentName, studentId, dateOfBirth);
+        return studentRepository.save(student);
+    }
+
     public Student getStudentById(String studentId) {
         return studentRepository.findByStudentId(studentId).orElse(null);
     }
