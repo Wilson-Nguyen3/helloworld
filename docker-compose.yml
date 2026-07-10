@@ -9,12 +9,12 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U helloworld_user -d helloworld_db"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -31,8 +31,8 @@ services:
       - JAVA_OPTS=-Xmx512m -Xms256m
       - STUDENT_NAME=${STUDENT_NAME:-Wilson Nguyen}
       - STUDENT_ID=${STUDENT_ID:-S12345}
-      - DB_HOST=localhost
-      - DB_PORT=5433
+      - DB_HOST=postgres
+      - DB_PORT=5432
       - DB_NAME=postgres
       - DB_USER=postgres
       - DB_PASSWORD=1234

@@ -19,7 +19,7 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
-pas
+
 # Install curl for healthcheck
 RUN apk add --no-cache curl
 
